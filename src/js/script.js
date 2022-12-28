@@ -64,7 +64,7 @@
     initMenu: function(){
       const testProduct = new Product();
       console.log('testProduct:', testProduct);
-    }
+    },
     
     init: function(){
       const thisApp = this;
