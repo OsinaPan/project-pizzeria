@@ -230,9 +230,10 @@
 
     initActions() {
       const thisWidget = this;
+      thisWidget.setValue(thisWidget.input.value);
 
       thisWidget.input.addEventListener('change', function() {
-        thisWidget.setValue(thisWidget.input.value);
+        thisWidget.value = thisWidget.element.input.value;
       });
 
       thisWidget.linkDecrease.addEventListener('click', function(event) {
