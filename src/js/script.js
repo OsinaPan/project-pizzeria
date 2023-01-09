@@ -205,18 +205,23 @@
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
     }
-    
+
     setValue(value) {
       const thisWidget = this;
       const newValue = parseInt(value);
 
       /* TODO: Add Validation */
-      if (thisWidget.value !== newValue) {
-        thisWidget.value = newValue;
-      }
-
       thisWidget.value = newValue;
       thisWidget.input.value = thisWidget.value;
+
+      if (thisWidget.value !== newValue && !isNaN(newValue)) {
+        thisWidget.value = newValue;
+
+        if (thisWidget.input.newValue < 0) {
+          thisWidget.linkDecrease = 0;
+        }
+      }
+
     }
   }
 
