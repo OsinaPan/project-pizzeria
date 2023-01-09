@@ -1,7 +1,4 @@
 /* global Handlebars, utils, dataSource */ // eslint-disable-line no-unused-vars
-
-const { get } = require("browser-sync");
-
 {
   'use strict';
 
@@ -42,13 +39,13 @@ const { get } = require("browser-sync");
     },
   };
 
-  const settings = {
+  /* const settings = {
     amountWidget: {
       defaultValue: 1,
       defaultMin: 1,
       defaultMax: 9,
     }
-  };
+  }; */
 
   const templates = {
     menuProduct: Handlebars.compile(document.querySelector(select.templateOf.menuProduct).innerHTML),
@@ -67,7 +64,6 @@ const { get } = require("browser-sync");
       thisProduct.initOrderForm();
       thisProduct.initAmountWidget();
       thisProduct.processOrder();
-      thisWidget.getElements(element);
 
       //console.log('new Product:', thisProduct);
     }
@@ -188,6 +184,18 @@ const { get } = require("browser-sync");
       const thisProduct = this;
       thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
     }
+  }
+
+
+  class AmountWidget {
+    constructor(element) {
+      const thisWidget = this;
+
+      console.log('AmountWidget:', thisWidget);
+      console.log('constructor arguments:', element);
+
+      thisWidget.getElements(element);
+    }
 
     getElements(element) {
       const thisWidget = this;
@@ -197,17 +205,7 @@ const { get } = require("browser-sync");
       thisWidget.linkDecrease = thisWidget.element.querySelector(select.widgets.amount.linkDecrease);
       thisWidget.linkIncrease = thisWidget.element.querySelector(select.widgets.amount.linkIncrease);
     }
-  }
-}
-
-  class AmountWidget {
-    constructor(element) {
-      const thisWidget = this;
-
-      console.log('AmountWidget:', thisWidget);
-      console.log('constructor arguments:', element);
-    }
-
+    
     setValue(value) {
       const thisWidget = this;
       const newValue = parseInt(value);
