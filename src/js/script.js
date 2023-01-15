@@ -213,71 +213,65 @@
       const newValue = parseInt(value);
 
       /* TODO: Add Validation */
-      thisWidget.value = newValue;
-      thisWidget.input.value = thisWidget.value;
-
       if (thisWidget.value !== newValue && !isNaN(newValue)) {
         thisWidget.value = newValue;
-        //console.log('setValue:', newValue);
-
-        if (thisWidget.input.newValue < 0) {
-          thisWidget.linkDecrease = 0;
-        }
-
       }
 
+      thisWidget.input.value = thisWidget.value;
     }
 
-    initActions() {
-      const thisWidget = this;
-      thisWidget.setValue(thisWidget.input.value);
-
-      thisWidget.input.addEventListener('change', function() {
-        thisWidget.value = thisWidget.element.input.value;
-      });
-
-      thisWidget.linkDecrease.addEventListener('click', function(event) {
-        event.preventDefault();
-
-        thisWidget.setValue(thisWidget.value -1);
-      });
-
-      thisWidget.linkIncrease.addEventListener('click', function(event) {
-        event.preventDefault();
-
-        thisWidget.setValue(thisWidget.value +1);
-      });
-    }
   }
 
-  const app = {
-    initMenu: function () {
-      const thisApp = this;
-      //console.log('thisApp.data:', thisApp.data);
+  initActions() {
+    const thisWidget = this;
+    thisWidget.setValue(thisWidget.input.value);
 
-      for (let productData in thisApp.data.products) {
-        new Product(productData, thisApp.data.products[productData]);
-      }
-    },
+    thisWidget.input.addEventListener('change', function () {
+      thisWidget.setValue(thisWidget.input.value);
+    });
 
-    initData: function () {
-      const thisApp = this;
+    thisWidget.linkDecrease.addEventListener('click', function (event) {
+      event.preventDefault();
 
-      thisApp.data = dataSource;
-    },
+      thisWidget.setValue(thisWidget.value - 1);
+    });
 
-    init: function () {
-      const thisApp = this;
-      //console.log('*** App starting ***');
-      //console.log('thisApp:', thisApp);
-      //console.log('classNames:', classNames);
-      //console.log('settings:', settings);
-      //console.log('templates:', templates);
+    thisWidget.linkIncrease.addEventListener('click', function (event) {
+      event.preventDefault();
 
-      thisApp.initData();
-      thisApp.initMenu();
-    },
-  };
+      thisWidget.setValue(thisWidget.value + 1);
+    });
+  }
 
-  app.init();
+
+const app = {
+  initMenu: function () {
+    const thisApp = this;
+    //console.log('thisApp.data:', thisApp.data);
+
+    for (let productData in thisApp.data.products) {
+      new Product(productData, thisApp.data.products[productData]);
+    }
+  },
+
+  initData: function () {
+    const thisApp = this;
+
+    thisApp.data = dataSource;
+  },
+
+  init: function () {
+    const thisApp = this;
+    //console.log('*** App starting ***');
+    //console.log('thisApp:', thisApp);
+    //console.log('classNames:', classNames);
+    //console.log('settings:', settings);
+    //console.log('templates:', templates);
+
+    thisApp.initData();
+    thisApp.initMenu();
+  },
+};
+
+app.init();
 }
