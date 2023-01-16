@@ -220,58 +220,56 @@
       thisWidget.input.value = thisWidget.value;
     }
 
-  }
-
-  initActions() {
-    const thisWidget = this;
-    thisWidget.setValue(thisWidget.input.value);
-
-    thisWidget.input.addEventListener('change', function () {
+    initActions() {
+      const thisWidget = this;
       thisWidget.setValue(thisWidget.input.value);
-    });
 
-    thisWidget.linkDecrease.addEventListener('click', function (event) {
-      event.preventDefault();
+      thisWidget.input.addEventListener('change', function () {
+        thisWidget.setValue(thisWidget.input.value);
+      });
 
-      thisWidget.setValue(thisWidget.value - 1);
-    });
+      thisWidget.linkDecrease.addEventListener('click', function (event) {
+        event.preventDefault();
 
-    thisWidget.linkIncrease.addEventListener('click', function (event) {
-      event.preventDefault();
+        thisWidget.setValue(thisWidget.value - 1);
+      });
 
-      thisWidget.setValue(thisWidget.value + 1);
-    });
+      thisWidget.linkIncrease.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        thisWidget.setValue(thisWidget.value + 1);
+      });
+    }
   }
 
+  const app = {
+    initMenu: function () {
+      const thisApp = this;
+      //console.log('thisApp.data:', thisApp.data);
 
-const app = {
-  initMenu: function () {
-    const thisApp = this;
-    //console.log('thisApp.data:', thisApp.data);
+      for (let productData in thisApp.data.products) {
+        new Product(productData, thisApp.data.products[productData]);
+      }
+    },
 
-    for (let productData in thisApp.data.products) {
-      new Product(productData, thisApp.data.products[productData]);
-    }
-  },
+    initData: function () {
+      const thisApp = this;
 
-  initData: function () {
-    const thisApp = this;
+      thisApp.data = dataSource;
+    },
 
-    thisApp.data = dataSource;
-  },
+    init: function () {
+      const thisApp = this;
+      //console.log('*** App starting ***');
+      //console.log('thisApp:', thisApp);
+      //console.log('classNames:', classNames);
+      //console.log('settings:', settings);
+      //console.log('templates:', templates);
 
-  init: function () {
-    const thisApp = this;
-    //console.log('*** App starting ***');
-    //console.log('thisApp:', thisApp);
-    //console.log('classNames:', classNames);
-    //console.log('settings:', settings);
-    //console.log('templates:', templates);
+      thisApp.initData();
+      thisApp.initMenu();
+    },
+  };
 
-    thisApp.initData();
-    thisApp.initMenu();
-  },
-};
-
-app.init();
+  app.init();
 }
