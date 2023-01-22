@@ -63,6 +63,11 @@
       wrapperActive: 'active',
     },
     // CODE ADDED END
+    db: {
+      url: '//localhost:3131',
+      products: 'products',
+      orders: 'orders',
+    },
   };
 
   const settings = {
@@ -504,7 +509,23 @@
     initData: function () {
       const thisApp = this;
 
-      thisApp.data = dataSource;
+      thisApp.data = {};
+
+      const url = settings.db.url + '/' + settings.db.products;
+
+      fetch(url)
+      .then(function(rawResposne){
+        return newResponse.json();
+      })
+      .then(function(parsedResponse){
+        console.log*'parsedResponse', parsedResponse);
+
+        /* save paresedResponse as thisApp.data.products */
+
+        /* execute initMenu method */
+      });
+
+      console.log('thisAdd.data', JSON.stringify(thisApp.data));
     },
 
     initCart: function () {
