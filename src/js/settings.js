@@ -50,14 +50,14 @@ export const select = {
 };
 
 export const classNames = {
-menuProduct: {
+  menuProduct: {
     wrapperActive: 'active',
     imageVisible: 'active',
-},
-// CODE ADDED START
-cart: {
+  },
+  // CODE ADDED START
+  cart: {
     wrapperActive: 'active',
-},
+  },
 // CODE ADDED END
 };
 
