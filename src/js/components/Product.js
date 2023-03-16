@@ -140,7 +140,9 @@ class Product {
 
     thisProduct.element.dispatchEvent(new CustomEvent('add-to-cart', {
       bubbles: true,
-      thisProduct: thisProduct.prepareCartProduct()
+      detail: {
+        product: thisProduct.prepareCartProduct()
+      }
     }));
   }
 
