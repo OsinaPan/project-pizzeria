@@ -30,7 +30,7 @@ class Booking {
         endDateParam,
       ],
       eventsRepeat: [
-        settings.db.reapeatParam,
+        settings.db.repeatParam,
         endDateParam,
       ],
     };
