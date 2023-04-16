@@ -187,6 +187,10 @@ class Booking {
     thisBooking.dom.tables = document.querySelectorAll(
       select.booking.tables
     );
+    thisBooking.dom.tablesContainer =
+      thisBooking.dom.wrapper.querySelector('.floor-plan');
+    thisBooking.dom.form =
+      thisBooking.dom.wrapper.querySelector('.booking-form');
   }
 
   initWidgets() {
@@ -206,6 +210,56 @@ class Booking {
 
     thisBooking.dom.wrapper.addEventListener('updated', function () {
       thisBooking.updateDOM();
+    });
+
+    thisBooking.dom.tablesContainer.addEventListener('click', function () {
+      thisBooking.initTables();
+    });
+  }
+
+  initActions() {
+    const thisBooking = this;
+
+    thisBooking.dom.form.addEventListener('submit', function (event) {
+      event.preventDefault();
+      thisBooking.sendBooking();
+      thisBooking.makeBooked();
+    });
+  }
+  initTables() {
+    const thisBooking = this;
+
+    thisBooking.dom.wrapper.addEventListener('updated', function () {
+      for (let table of thisBooking.dom.tables) {
+        table.classList.remove('selected');
+      }
+    });
+
+    thisBooking.dom.tablesContainer.addEventListener('click', function (event) {
+      event.preventDefault();
+      const clickedElement = event.target;
+      if (clickedElement.classList.contains('table')) {
+        const id = clickedElement.getAttribute('data-table');
+        if (
+          !clickedElement.classList.contains(classNames.booking.tableBooked)
+        ) {
+          for (let table of thisBooking.dom.tables) {
+            if (table == clickedElement) {
+              if (!clickedElement.classList.contains('selected')) {
+                clickedElement.classList.add('selected');
+                thisBooking.selectedTable = id;
+              } else {
+                clickedElement.classList.remove('selected');
+                thisBooking.selectedTable = '';
+              }
+            } else {
+              table.classList.remove('selected');
+            }
+          }
+        } else {
+          alert('This table is booked');
+        }
+      }
     });
   }
 }
