@@ -262,6 +262,44 @@ class Booking {
       }
     });
   }
+  sendBooking() {
+    const thisBooking = this;
+    const url = settings.db.url + '/' + settings.db.bookings;
+    const payload = {
+      date: thisBooking.date,
+      hour: thisBooking.hourPicker.value,
+      table: thisBooking.table || null,
+      duration: parseInt(thisBooking.duration),
+      ppl: parseInt(thisBooking.ppl),
+      starters: [],
+      phone: thisBooking.phone,
+      address: thisBooking.address,
+    };
+
+    for (let starter of thisBooking.starters) {
+      if (starter.checked) {
+        payload.starters.push(starter.getData());
+      } else {
+        const index = thisBooking.starters.indexOf(starter);
+        thisBooking.starters.splice(index, 1);
+      }
+    }
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+
+    fetch(url, options)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (parsedResponse) {
+        console.log('parsedResponse:', parsedResponse);
+      });
+  }
 }
 
 export default Booking;
