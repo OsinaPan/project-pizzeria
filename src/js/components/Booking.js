@@ -11,6 +11,7 @@ class Booking {
     thisBooking.render(element);
     thisBooking.initWidgets();
     thisBooking.getData();
+    thisBooking.initTables();
   }
 
   getData() {
@@ -68,11 +69,11 @@ class Booking {
       .then(function(allResponses){
         const bookingsResponse = allResponses[0];
         const eventsCurrentResponse = allResponses[1];
-        const ecentsRepeatResponse = allResponses[2];
+        const eventsRepeatResponse = allResponses[2];
         return Promise.all([
           bookingsResponse.json(),
           eventsCurrentResponse.json(),
-          ecentsRepeatResponse.json(),
+          eventsRepeatResponse.json(),
         ]);
       })
       .then(function([bookings, eventsCurrent, eventsRepeat]){
