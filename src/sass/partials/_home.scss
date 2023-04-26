@@ -1,6 +1,6 @@
 //content
 
-.home-page-wrapper {
+home-page-wrapper {
   margin: ($base-size * 3.5) auto;
   padding: 25px;
   background: $color-light;
@@ -12,6 +12,7 @@
 
 .home-links {
   &.top {
+    margin-top: 10px;
     display: inline-flex;
   }
 
@@ -117,6 +118,43 @@
 
 
   }
+}
+
+//Carousel
+.carousel {
+  height: $base-size * 16;
+  border-radius: 5px;
+}
+
+.box-wrapper {
+  display: flex;
+  justify-content: space-around;
+  border-radius: 5px;
+
+}
+
+.box-img img {
+  flex: 0 0 33%;
+  height: $base-size * 16;
+  width: $base-size * 16;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 50px;  
+}
+
+.box-description {
+  flex: 0 0 66%;
+  padding-left: $base-size * 2;
+  padding-right: $base-size * 6;
+  width: 100%;
+  font-family: $font-text;
+  color: $color-dark;
+
+}
+
+.carousel-cell {
+  width: 100%; /* full width */
+  height: $base-size * 16; /* height of carousel */
 }
 
 //Gallery

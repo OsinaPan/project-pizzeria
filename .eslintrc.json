@@ -31,5 +31,13 @@
     },
     "globals": {
       "Handlebars": false
-    }
+    },
+    "overrides": [
+        {
+          "files": ["flickity.pkgd.min.js"],
+          "rules": {
+            "quotes": "off"
+          }
+        }
+      ]
 }

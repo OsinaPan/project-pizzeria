@@ -11,6 +11,7 @@ export const select = {
     pages: '#pages',
     booking: '.booking-wrapper',
     homePage: '.home-page-wrapper',
+    carousel: '.carousel',
   },
   all: {
     menuProducts: '#product-list > .product',
@@ -45,9 +46,17 @@ export const select = {
     peopleAmount: '.people-amount',
     hoursAmount: '.hours-amount',
     tables: '.floor-plan .table',
+    floor: '.floor-plan',
+    duration: '[name="hours"]',
+    people: '[name="people"]',
+    submit: '.booking-form [type="submit"]',
+    address: '[name="address"]',
+    phone: '[name="phone"]',
+    starters: 'input[type="checkbox"]',
   },
   nav: {
     links: '.main-nav a',
+    homeLinks: '.home-links a',
   },
   // CODE ADDED START
   cart: {
