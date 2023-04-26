@@ -15,8 +15,14 @@ class Product {
     thisProduct.initOrderForm();
     thisProduct.initAmountWidget();
     thisProduct.processOrder();
+  }
 
-    //console.log('new Product:', thisProduct);
+  initAmountWidget() {
+    const thisProduct = this;
+    thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
+    thisProduct.amountWidgetElem.addEventListener('updated', function () {
+      thisProduct.processOrder();
+    });
   }
 
   renderInMenu() {
@@ -136,22 +142,14 @@ class Product {
 
   addToCart() {
     const thisProduct = this;
-    //app.cart.add(thisProduct.prepareCartProduct());
-
+    thisProduct.name = thisProduct.data.name;
+    thisProduct.amount = thisProduct.amountWidget.value;
     thisProduct.element.dispatchEvent(new CustomEvent('add-to-cart', {
       bubbles: true,
       detail: {
         product: thisProduct.prepareCartProduct()
       }
     }));
-  }
-
-  initAmountWidget() {
-    const thisProduct = this;
-    thisProduct.amountWidget = new AmountWidget(thisProduct.amountWidgetElem);
-    thisProduct.amountWidgetElem.addEventListener('updated', function () {
-      thisProduct.processOrder();
-    });
   }
 
   prepareCartProduct() {

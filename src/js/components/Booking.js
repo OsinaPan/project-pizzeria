@@ -296,10 +296,16 @@ class Booking {
     fetch(url, options)
       .then(function (response) {
         return response.json();
-      })
+      }) .catch(err => {`Error: ${err}`;})
       .then(function (parsedResponse) {
-        console.log('parsedResponse:', parsedResponse);
-      });
+        thisBooking.makeBooked(
+          parsedResponse.date, 
+          parsedResponse.hour, 
+          parsedResponse.duration,
+          parsedResponse.table
+        );
+        thisBooking.updateDOM();
+      }) .catch(err => {`Error: ${err}`;});
   }
 }
 

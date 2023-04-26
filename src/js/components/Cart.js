@@ -49,6 +49,39 @@ class Cart {
     });
   }
 
+  sendOrder() {
+    const thisCart = this;
+    const url = settings.db.url + '/' + settings.db.orders;
+    const payload = {
+      address: thisCart.dom.address.value,
+      phone: thisCart.dom.phone.value,
+      totalPrice: thisCart.totalPrice,
+      subtotalPrice: thisCart.subtotalPrice,
+      totalNumber: thisCart.totalNumber,
+      deliveryFee: settings.cart.defaultDeliveryFee,
+      products: [],
+    };
+
+    for(let prod of thisCart.products) {
+      payload.products.push(prod.getData());
+    }
+    const options = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    };
+    
+    fetch(url, options)
+      .then(function(response){
+        return response.json();
+      }).catch(err => {`Error: ${err}`;})
+      .then(function(parsedResponse){
+        console.log('parsedResponse', parsedResponse);
+      }).catch(err => {`Error: ${err}`;});
+  }
+  
   add(menuProduct) {
     const thisCart = this;
     //console.log('adding product', menuProduct);
@@ -95,34 +128,6 @@ class Cart {
     const productsToRemove = thisCart.products.indexOf(event);
     thisCart.products.splice(productsToRemove, 1);
     thisCart.update();
-  }
-
-  sendOrder() {
-    const thisCart = this;
-    const url = settings.db.url + '/' + settings.db.orders;
-    const payload = {
-      address: thisCart.dom.address.value,
-      phone: thisCart.dom.phone.value,
-      totalPrice: thisCart.totalPrice,
-      subtotalPrice: thisCart.subtotalPrice,
-      totalNumber: thisCart.totalNumber,
-      deliveryFee: settings.cart.defaultDeliveryFee,
-      products: [],
-    };
-
-    for(let prod of thisCart.products) {
-      payload.products.push(prod.getData());
-    }
-    const options = {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(payload),
-    };
-    
-    fetch(url, options);
-    console.log('payLoad', payload);
   }
 }
 
