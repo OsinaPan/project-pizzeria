@@ -1,3 +1,5 @@
+/* global require, process */
+
 import path from 'path';
 import jsonServer from 'json-server';
 
